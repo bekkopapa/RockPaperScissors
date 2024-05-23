@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>Rock, Paper, Scissors Game</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>가위! 바위! 보!</h1>
+      <div class="game-area">
+        <div class="player-area">
+          <h2>플레이어</h2>
+          <div class="choices">
+            <button id="rock" onclick="play('rock')">
+              <img src="rock.png" alt="Rock" />
+            </button>
+            <button id="scissors" onclick="play('scissors')">
+              <img src="scissors.png" alt="Scissors" />
+            </button>
+            <button id="paper" onclick="play('paper')">
+              <img src="paper.png" alt="Paper" />
+            </button>
+          </div>
+        </div>
+        <div class="computer-area">
+          <h2>인공지능</h2>
+          <div class="choices">
+            <div id="computer-rock" class="computer-choice">
+              <img src="rock.png" alt="Rock" />
+            </div>
+            <div id="computer-scissors" class="computer-choice">
+              <img src="scissors.png" alt="Scissors" />
+            </div>
+            <div id="computer-paper" class="computer-choice">
+              <img src="paper.png" alt="Paper" />
+            </div>
+          </div>
+        </div>
+        <div id="result" class="result"></div>
+        <audio id="win-sound" src="/RPS/clap.mp3"></audio>
+        <audio id="lose-sound" src="/RPS/fart.mp3"></audio>
+        <audio id="draw-sound" src="/RPS/boo.mp3"></audio>
+   <script>
+  function play(userChoice) {
+    const choices = ["rock", "paper", "scissors"];
+    const computerChoice = choices[Math.floor(Math.random() * choices.length)];
+
+    const resultDiv = document.getElementById("result");
+
+    let result = "";
+
+    // Get sound elements
+    const winSound = document.getElementById("win-sound");
+    const loseSound = document.getElementById("lose-sound");
+    const drawSound = document.getElementById("draw-sound");
+
+    // Pause any playing sounds
+    winSound.pause();
+    loseSound.pause();
+    drawSound.pause();
+    
+    // Reset sound time to start
+    winSound.currentTime = 0;
+    loseSound.currentTime = 0;
+    drawSound.currentTime = 0;
+
+    if (userChoice === computerChoice) {
+      result = "비겼다!";
+      resultDiv.style.color = "blue";
+      drawSound.play();
+    } else if (
+      (userChoice === "rock" && computerChoice === "scissors") ||
+      (userChoice === "scissors" && computerChoice === "paper") ||
+      (userChoice === "paper" && computerChoice === "rock")
+    ) {
+      result = "이겼다!";
+      resultDiv.style.color = "green";
+      winSound.play();
+    } else {
+      result = "졌다!";
+      resultDiv.style.color = "red";
+      loseSound.play();
+    }
+
+    resultDiv.textContent = result;
+
+    document.getElementById("computer-rock").classList.remove("pop-up");
+    document.getElementById("computer-scissors").classList.remove("pop-up");
+    document.getElementById("computer-paper").classList.remove("pop-up");
+
+    document.getElementById(`computer-${computerChoice}`).classList.add("pop-up");
+
+    const buttons = document.querySelectorAll(".player-area button");
+    buttons.forEach((button) => button.classList.remove("pop-up"));
+    document.getElementById(userChoice).classList.add("pop-up");
+  }
+</script>
+      </body>
+</html>
