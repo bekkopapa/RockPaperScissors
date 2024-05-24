@@ -11,7 +11,7 @@
       <h1>가위! 바위! 보!</h1>
       <div class="game-area">
         <div class="player-area">
-          <h2>플레이어</h2>
+          <h2 id="player">플레이어</h2>
           <div class="choices">
             <button id="rock" onclick="play('rock')">
               <img src="rock.png" alt="Rock" />
@@ -24,6 +24,7 @@
             </button>
           </div>
         </div>
+        <div id="result" class="result"></div>
         <div class="computer-area">
           <h2>인공지능</h2>
           <div class="choices">
@@ -38,10 +39,9 @@
             </div>
           </div>
         </div>
-        <div id="result" class="result"></div>
-        <audio id="win-sound" src="/clap.mp3"></audio>
-        <audio id="lose-sound" src="/fart.mp3"></audio>
-        <audio id="draw-sound" src="/boo.mp3"></audio>
+        <audio id="win-sound" src="/sound/clap.mp3"></audio>
+        <audio id="lose-sound" src="/sound/fart.mp3"></audio>
+        <audio id="draw-sound" src="/sound/boo.mp3"></audio>
    <script>
   function play(userChoice) {
     const choices = ["rock", "paper", "scissors"];

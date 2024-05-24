@@ -8,6 +8,10 @@ body {
   background-color: #ffdfdf;
 }
 
+#player {
+  font-size: 30px;
+}
+
 .container {
   text-align: center;
   width: 100%;
@@ -26,12 +30,12 @@ body {
   justify-content: center;
   height: 100%;
   width: 100%;
-  margin-top: -50px; /* Adjust this value as needed to move the game area up */
+  margin-top: -200px; /* Adjust this value as needed to move the game area up */
 }
 
 .player-area,
 .computer-area {
-  margin-bottom: 120px;
+  margin-bottom: 100px;
 }
 
 .choices {
@@ -71,6 +75,7 @@ button img {
 
 .result {
   margin-top: -40px;
+  margin-bottom: 50px;
   font-size: 30px;
   font-weight: bold;
 }
