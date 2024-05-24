@@ -46,13 +46,13 @@ button {
   cursor: pointer;
   padding: 0;
   margin: 0 10px;
-  transition: transform 0.3s ease;
+  transition: transform 0.1s ease;
 }
 
 button img {
-  width: 120px;
-  height: 120px;
-  transition: transform 0.2s ease;
+  width: 140px;
+  height: 140px;
+  transition: transform 0.1s ease;
   filter: grayscale(100%);
 }
 
@@ -60,7 +60,7 @@ button img {
   width: 100px;
   height: 100px;
   margin: 0 10px;
-  transition: transform 0.2s ease filter 0.2s ease;
+  transition: transform 0.1s ease filter 0.1s ease;
   filter: grayscale(100%);
 }
 
@@ -71,7 +71,41 @@ button img {
 
 .result {
   margin-top: -40px;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   font-size: 30px;
   font-weight: bold;
+}
+
+.count-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.count-area p {
+  margin: 0 10px;
+  font-size: 1.2em;
+  color: #333;
+  text-align: center;
+}
+
+.count-area span {
+  font-weight: bold;
+}
+
+#win-count {
+  color: blue;
+}
+
+#lose-count {
+  color: red;
+}
+
+#draw-count {
+  color: green;
+}
+
+#win-rate {
+  color: #007bff;
 }

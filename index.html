@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <audio id="win-sound" src="sound/clap.mp3"></audio>
+    <audio id="lose-sound" src="sound/fart.mp3"></audio>
+    <audio id="draw-sound" src="sound/boo.mp3"></audio>
+  </div>
     <div class="container">
       <h1>가위! 바위! 보!</h1>
       <div class="game-area">
@@ -25,6 +29,12 @@
           </div>
         </div>
         <div id="result" class="result"></div>
+        <div class="count-area">
+          <p>승리: <span id="win-count">0</span></p>
+          <p>패배: <span id="lose-count">0</span></p>
+          <p>비김: <span id="draw-count">0</span></p>
+          <p>당신의 승률: <span id="win-rate">0%</span></p>
+        </div>
         <div class="computer-area">
           <h2>인공지능</h2>
           <div class="choices">
@@ -39,63 +49,77 @@
             </div>
           </div>
         </div>
-        <audio id="win-sound" src="sound/clap.mp3"></audio>
-        <audio id="lose-sound" src="sound/fart.mp3"></audio>
-        <audio id="draw-sound" src="sound/boo.mp3"></audio>
-   <script>
-  function play(userChoice) {
-    const choices = ["rock", "paper", "scissors"];
-    const computerChoice = choices[Math.floor(Math.random() * choices.length)];
-
-    const resultDiv = document.getElementById("result");
-
-    let result = "";
-
-    // Get sound elements
-    const winSound = document.getElementById("win-sound");
-    const loseSound = document.getElementById("lose-sound");
-    const drawSound = document.getElementById("draw-sound");
-
-    // Pause any playing sounds
-    winSound.pause();
-    loseSound.pause();
-    drawSound.pause();
+        <script>
+          let winCount = 0;
+          let loseCount = 0;
+          let drawCount = 0;
+          let totalCount = 0;
     
-    // Reset sound time to start
-    winSound.currentTime = 0;
-    loseSound.currentTime = 0;
-    drawSound.currentTime = 0;
-
-    if (userChoice === computerChoice) {
-      result = "비겼다!";
-      resultDiv.style.color = "blue";
-      drawSound.play();
-    } else if (
-      (userChoice === "rock" && computerChoice === "scissors") ||
-      (userChoice === "scissors" && computerChoice === "paper") ||
-      (userChoice === "paper" && computerChoice === "rock")
-    ) {
-      result = "이겼다!";
-      resultDiv.style.color = "green";
-      winSound.play();
-    } else {
-      result = "졌다!";
-      resultDiv.style.color = "red";
-      loseSound.play();
-    }
-
-    resultDiv.textContent = result;
-
-    document.getElementById("computer-rock").classList.remove("pop-up");
-    document.getElementById("computer-scissors").classList.remove("pop-up");
-    document.getElementById("computer-paper").classList.remove("pop-up");
-
-    document.getElementById(`computer-${computerChoice}`).classList.add("pop-up");
-
-    const buttons = document.querySelectorAll(".player-area button");
-    buttons.forEach((button) => button.classList.remove("pop-up"));
-    document.getElementById(userChoice).classList.add("pop-up");
-  }
-</script>
-      </body>
+          function play(userChoice) {
+            const choices = ["rock", "paper", "scissors"];
+            const computerChoice = choices[Math.floor(Math.random() * choices.length)];
+    
+            const resultDiv = document.getElementById("result");
+    
+            let result = "";
+    
+            const winSound = document.getElementById("win-sound");
+            const loseSound = document.getElementById("lose-sound");
+            const drawSound = document.getElementById("draw-sound");
+    
+            winSound.pause();
+            loseSound.pause();
+            drawSound.pause();
+    
+            winSound.currentTime = 0;
+            loseSound.currentTime = 0;
+            drawSound.currentTime = 0;
+    
+            if (userChoice === computerChoice) {
+              result = "비겼다!";
+              resultDiv.style.color = "blue";
+              drawSound.play();
+              drawCount++;
+            } else if (
+              (userChoice === "rock" && computerChoice === "scissors") ||
+              (userChoice === "scissors" && computerChoice === "paper") ||
+              (userChoice === "paper" && computerChoice === "rock")
+            ) {
+              result = "이겼다!";
+              resultDiv.style.color = "green";
+              winSound.play();
+              winCount++;
+            } else {
+              result = "졌다!";
+              resultDiv.style.color = "red";
+              loseSound.play();
+              loseCount++;
+            }
+    
+            totalCount++;
+            const winRate = ((winCount / totalCount) * 100).toFixed(2);
+    
+            resultDiv.textContent = result;
+    
+            const computerChoices = document.querySelectorAll(".computer-choice");
+            computerChoices.forEach((choice) => choice.classList.remove("pop-up"));
+    
+            document.getElementById(`computer-${computerChoice}`).classList.add("pop-up");
+    
+            const buttons = document.querySelectorAll(".player-area button");
+            buttons.forEach((button) => button.classList.remove("pop-up"));
+            document.getElementById(userChoice).classList.add("pop-up");
+    
+            document.getElementById("win-count").textContent = winCount;
+            document.getElementById("lose-count").textContent = loseCount;
+            document.getElementById("draw-count").textContent = drawCount;
+            document.getElementById("win-rate").textContent = `${winRate}%`;
+    
+            setTimeout(() => {
+              computerChoices.forEach((choice) => choice.classList.remove("pop-up"));
+              buttons.forEach((button) => button.classList.remove("pop-up"));
+            }, 180);
+          }
+        </script>    </div>
+  </body>
 </html>
