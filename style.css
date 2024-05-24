@@ -8,10 +8,6 @@ body {
   background-color: #ffdfdf;
 }
 
-#player {
-  font-size: 30px;
-}
-
 .container {
   text-align: center;
   width: 100%;
@@ -30,7 +26,7 @@ body {
   justify-content: center;
   height: 100%;
   width: 100%;
-  margin-top: -200px; /* Adjust this value as needed to move the game area up */
+  margin-top: -30px; /* Adjust this value as needed to move the game area up */
 }
 
 .player-area,
