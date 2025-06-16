@@ -10,7 +10,6 @@
     <audio id="win-sound" src="sound/clap.mp3"></audio>
     <audio id="lose-sound" src="sound/fart.mp3"></audio>
     <audio id="draw-sound" src="sound/boo.mp3"></audio>
-  </div>
     <div class="container">
       <h1>가위! 바위! 보!</h1>
       <div class="game-area">
@@ -34,6 +33,7 @@
           <p>패배: <span id="lose-count">0</span></p>
           <p>비김: <span id="draw-count">0</span></p>
           <p>당신의 승률: <span id="win-rate">0%</span></p>
+          <button id="reset-button" onclick="resetGame()">리셋</button>
         </div>
         <div class="computer-area">
           <h2>인공지능</h2>
@@ -120,6 +120,20 @@
               buttons.forEach((button) => button.classList.remove("pop-up"));
             }, 180);
           }
-        </script>    </div>
+
+          function resetGame() {
+            winCount = 0;
+            loseCount = 0;
+            drawCount = 0;
+            totalCount = 0;
+            document.getElementById("win-count").textContent = winCount;
+            document.getElementById("lose-count").textContent = loseCount;
+            document.getElementById("draw-count").textContent = drawCount;
+            document.getElementById("win-rate").textContent = "0%";
+            document.getElementById("result").textContent = "";
+          }
+        </script>
+      </div>
+    </div>
   </body>
 </html>
