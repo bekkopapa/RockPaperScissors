@@ -1,0 +1,16 @@
+{
+  "name": "rockpaperscissors",
+  "version": "1.0.0",
+  "description": "Rock Paper Scissors game",
+  "type": "commonjs",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0",
+    "jsdom": "^23.0.0"
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
+  }
+}
